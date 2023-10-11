@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class BlogController extends AbstractController
 {
@@ -32,8 +33,12 @@ class BlogController extends AbstractController
     public function createProduct(EntityManagerInterface $entityManager): Response
     {
         $blog = new Blog();
-        $blog->setTitle('Keyboard');
+        $blog->setTitle('Keyboard Hello Abdelghafour');
         $blog->setContent('Ergonomic and stylish !');
+
+        $slugger = new AsciiSlugger('en');
+        $slug = $slugger->slug($blog->getTitle());
+        $blog->setSlug($slug);
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($blog);
