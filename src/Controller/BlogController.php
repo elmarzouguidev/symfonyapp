@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-
+use Symfony\Component\Uid\Uuid;
 class BlogController extends AbstractController
 {
 
@@ -39,6 +39,10 @@ class BlogController extends AbstractController
         $slugger = new AsciiSlugger('en');
         $slug = $slugger->slug($blog->getTitle());
         $blog->setSlug($slug);
+
+
+        $uuid = Uuid::v4(); 
+        $blog->setUuid($uuid);
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($blog);

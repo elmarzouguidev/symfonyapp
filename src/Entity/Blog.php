@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\BlogRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\Uuid;
+
 #[ORM\Entity(repositoryClass: BlogRepository::class)]
 class Blog
 {
@@ -21,6 +24,9 @@ class Blog
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
+
+    #[ORM\Column(type: 'uuid', nullable: true)]
+    private ?Uuid $uuid = null;
 
     public function getId(): ?int
     {
@@ -59,6 +65,18 @@ class Blog
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getUuid(): ?Uuid
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(?Uuid $uuid): static
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }
