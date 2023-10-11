@@ -25,7 +25,7 @@ class BlogController extends AbstractController
     public function list(): Response
     {
         return $this->render('blog/index.html.twig', [
-            'title' => 'Elmarzougui Blog',
+            'title' => 'Elmarzougui Blog '.WelcomApp(),
         ]);
     }
 
